@@ -1,11 +1,11 @@
 package com.springlearn.StudentDetails.controller;
 
-import com.springlearn.StudentDetails.model.DeletedEmployee;
-import com.springlearn.StudentDetails.repo.DeletedEmployeeRepository;
 import com.springlearn.StudentDetails.model.EmployeeDetails;
-import com.springlearn.StudentDetails.repo.EmployeeRepository;
+import com.springlearn.StudentDetails.service.EmployeeService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -14,69 +14,48 @@ import java.util.Optional;
 public class empController {
 
     @Autowired
-    EmployeeRepository empRepo;
+    EmployeeService service;
 
-    @Autowired
-    DeletedEmployeeRepository delRepo;
-//
-//    @PostMapping
-//    public ResponseEntity<EmployeeDetails> add(@RequestBody EmployeeDetails emp){
-//
-//       EmployeeDetails empDetails = empRepo.save(emp);
-//        return ResponseEntity.ok(empDetails);
-//    }
-
-    @RequestMapping({"/index","/"})
-    public String home(){
+    @RequestMapping({"/index", "/"})
+    public String home() {
         return "index";
     }
 
-    @RequestMapping("/Success")
-    public String add(@RequestParam("id") int id, @RequestParam("name") String name,
-                      @RequestParam("age") int age,@RequestParam("salary") int salary){
-
-        EmployeeDetails emp = new EmployeeDetails();
-
-        emp.setId(id);
-        emp.setName(name);
-        emp.setAge(age);
-        emp.setSalary(salary);
-
-        System.out.println("page called");
-
-        empRepo.save(emp);
-
-        return "Success";
+    @RequestMapping("/success")
+    public String add(@ModelAttribute EmployeeDetails emp, Model model) {
+        return service.addDetails(emp, model);
     }
 
     @RequestMapping("delete")
-    public String softDelete(@RequestParam("id1") int id){
-
-        Optional<EmployeeDetails> empOpt = empRepo.findById(id);
-
-        if(empOpt.isPresent()){
-            EmployeeDetails emp = empOpt.get();
-
-            DeletedEmployee demp = new DeletedEmployee();
-
-            demp.setId(emp.getId());
-            demp.setName(emp.getName());
-            demp.setAge(emp.getAge());
-            demp.setSalary(emp.getSalary());
-
-            delRepo.save(demp);
-
-            empRepo.deleteById(id);
-
-
-            System.out.println("Document Archived");
-
-        }
-        else {
-            System.out.println("Id not found");
-        }
-
-        return "delete";
+    public String softDelete(@RequestParam("id1") int id, Model model) {
+        return service.delete(id, model);
     }
 
+    @RequestMapping("show")
+    public String getStudents(HttpServletRequest request) {
+        return service.getDetails(request);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String showUpdatePage() {
+        return "update";
+    }
+
+    @RequestMapping(value = "/fetch", method = RequestMethod.POST)
+    public String fetchStudent(@RequestParam("id") int id, Model model) {
+        Optional<EmployeeDetails> empDetails = service.getStudentById(id);
+        if (empDetails.isPresent()) {
+            model.addAttribute("emp", empDetails.get());
+        } else {
+            model.addAttribute("error", "Student not found!");
+        }
+        return "update";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateStudent(@ModelAttribute EmployeeDetails emp, Model model) {
+        service.saveStudent(emp);
+        model.addAttribute("success", "Student details updated successfully!");
+        return "update";
+    }
 }

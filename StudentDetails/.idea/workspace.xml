@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5294fd7c-6845-4278-97aa-59a5dae641ff" name="Changes" comment="" />
+    <list default="true" id="5294fd7c-6845-4278-97aa-59a5dae641ff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ConsumerDetails/src/main/java/com/springlearn/ConsumerDetails/ConsumerRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ConsumerDetails/src/main/java/com/springlearn/ConsumerDetails/controller/ConsumerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ConsumerDetails/src/main/java/com/springlearn/ConsumerDetails/model/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ConsumerDetails/src/main/java/com/springlearn/ConsumerDetails/model/ConsumerInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ConsumerDetails/src/main/java/com/springlearn/ConsumerDetails/service/ConsumerService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,8 +49,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Java/spring-security-demo",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+    "last_opened_file_path": "D:/Java/Vikram",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
