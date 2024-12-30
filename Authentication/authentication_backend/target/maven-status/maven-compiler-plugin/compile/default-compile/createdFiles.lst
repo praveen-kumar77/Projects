@@ -1,0 +1,5 @@
+com\flutterlearn\LoginProcess\model\User.class
+com\flutterlearn\LoginProcess\repo\UserRepository.class
+com\flutterlearn\LoginProcess\controller\homeController.class
+com\flutterlearn\LoginProcess\service\AuthService.class
+com\flutterlearn\LoginProcess\LoginProcessApplication.class
